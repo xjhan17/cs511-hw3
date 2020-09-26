@@ -38,7 +38,7 @@ def extractGraph():
     return nodes, weight, boolValue
 
 def maxClique(length):
-    solver = Solver()
+    s = Solver()
     nodes, weight, boolValue = extractGraph()
     maxClique = []
     constraints = []
@@ -55,12 +55,12 @@ def maxClique(length):
                 for cons in elements:
                     constraints += [And(boolValue[index][cons])]
             constraints += [currWeight > maxWeight]
-            solver.add(And(constraints))
-            if solver.check() == sat:
+            s.add(And(constraints))
+            if s.check() == sat:
                 maxWeight = currWeight
                 maxClique = elements
             constraints = []
-            solver.reset()
+            s.reset()
     return maxClique
 
 def main():
