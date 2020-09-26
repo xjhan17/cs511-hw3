@@ -22,7 +22,7 @@ def extractGraph():
     n = len(G)
     weight = []
     nodes = []
-    value = [[Bool("x_%s_%s" % (i+1, j+1)) for j in range(n)] for i in range(n)]
+    boolValue = [[Bool("x_%s_%s" % (i+1, j+1)) for j in range(n)] for i in range(n)]
     for i in range(n):
         weight.append(Int("w_%s" % (i+1)))
         nodes.append(i)
@@ -34,12 +34,12 @@ def extractGraph():
             adjNodes = G[i][2]
         for j in range(n):
             if (j + 1) not in adjNodes and i != j:
-                value[i][j] = False
-    return nodes, weight, value
+                boolValue[i][j] = False
+    return nodes, weight, boolValue
 
 def maxClique(length):
     solver = Solver()
-    nodes, weight, value = extractGraph()
+    nodes, weight, boolValue = extractGraph()
     maxClique = []
     constraints = []
     maxWeight = 0
@@ -53,7 +53,7 @@ def maxClique(length):
                 else:
                     currWeight += weight[index]
                 for cons in elements:
-                    constraints += [And(value[index][cons])]
+                    constraints += [And(boolValue[index][cons])]
             constraints += [currWeight > maxWeight]
             solver.add(And(constraints))
             if solver.check() == sat:
