@@ -22,9 +22,9 @@ def extractGraph():
     n = len(G)
     weight = []
     nodes = []
-    boolValue = [[Bool("x_%s_%s" % (i+1, j+1)) for j in range(n)] for i in range(n)]
+    boolValue = [[Bool('x_%s_%s' % (i+1, j+1)) for j in range(n)] for i in range(n)]
     for i in range(n):
-        weight.append(Int("w_%s" % (i+1)))
+        weight.append(Int('w_%s' % (i+1)))
         nodes.append(i)
     for i in range(n):
         weight[i] = G[i][1]
