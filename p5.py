@@ -1,7 +1,6 @@
 from z3 import *
 
-# Int('w %s' % (i+1))
-
+# Translated from scheduling.smt2
 
 A = Int('A')
 At = Int('At')
@@ -18,18 +17,18 @@ Ft = Int('Ft')
 End = Int('End')
 
 A >= 0
-At == 2
+At = 2
 B >= 0
-Bt == 1
+Bt = 1
 C >= 0
-Ct == 2
+Ct = 2
 D >= 0
-Dt == 2
+Dt = 2
 E >= 0
-Et == 7
+Et = 7
 F >= 0
-Ft == 5
-End == 14
+Ft = 5
+End = 14
 
 phi1 = Or(((A+At)<=C), ((C+Ct)<=A))
 phi2 = Or(((B+Bt)<=D), ((D+Dt)<=B))
@@ -47,5 +46,5 @@ s.add(E<=(End-Et))
 s.add(F<=(End-Ft))
 
 
-
 print (s.check())
+print (s.model()[A], s.model()[B], s.model()[C],s.model()[D], s.model()[E], s.model()[F])
